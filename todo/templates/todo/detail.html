@@ -23,8 +23,13 @@
   </ul>
 
   <div>
+    <a href="{% url 'index' %}">Top</a>
+    
+    <a href="{% url 'delete' task.id %}">Delete</a>
+    
     <a href="{% url 'update' task.id %}">編集する</a>|<a href="{% url 'index' %}">Top</a>
   </div>
 </body>
+
 
 </html>
