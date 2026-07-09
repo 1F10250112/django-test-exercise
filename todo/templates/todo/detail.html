@@ -7,26 +7,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="INIAD">
-    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css2.css' %}">
   </head>
 
   <body>
-    <h1>{{ task.title }}</h1>
-    <ul>
-      <li>Posted at: {{ task.posted_at }}</li>
-      {% if task.due_at %}
-      <li>Due at: {{ task.due_at }}</li>
-      {% endif %}
-      {% if task.completed %}
-      <li>Status: Completed</li>
-      {% else %}
-      <li>Status: Not Completed</li>
-      {% endif %}
-    </ul>
+    <main class="detail-page">
+      <header class="page-heading">
+        <h1>{{ task.title }}</h1>
+        <p class="caption">Task detail and progress overview.</p>
+      </header>
 
-    <div>
-      <a href="{% url 'index' %}">Top</a>
-    </div>
+      <section class="detail-card">
+        <ul class="meta-list">
+          <li>Posted at: {{ task.posted_at }}</li>
+          {% if task.due_at %}
+          <li>Due at: {{ task.due_at }}</li>
+          {% endif %}
+          {% if task.completed %}
+          <li>Status: Completed</li>
+          {% else %}
+          <li>Status: Not Completed</li>
+          {% endif %}
+        </ul>
+
+        <div class="detail-actions">
+          <a class="top-link" href="{% url 'index' %}">← Top</a>
+        </div>
+      </section>
+    </main>
   </body>
 
 </html>
