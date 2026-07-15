@@ -46,6 +46,7 @@
         <li>Status: Completed</li>
         {% else %}
         <li>Status: Not Completed</li>
+        <li><a href="{% url 'finish' task.id %}">Finish</a></li>
         {% endif %}
       </ul>
     </div>

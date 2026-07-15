@@ -32,6 +32,9 @@
 
         <div class="detail-actions">
           <a class="top-link" href="{% url 'index' %}">← Top</a>
+          {% if not task.completed %}
+          <a class="top-link" href="{% url 'finish' task.id %}">Finish</a>
+          {% endif %}
         </div>
       </section>
     </main>
