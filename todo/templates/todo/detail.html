@@ -2,34 +2,48 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-  <head>
-    <title>To Do Application</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="INIAD">
-    <link rel="stylesheet" href="{% static 'css/css2.css' %}">
-  </head>
+<head>
+  <title>To Do Application</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="INIAD">
+  <link rel="stylesheet" href="{% static 'css/css2.css' %}">
+</head>
 
-  <body>
-    <main class="detail-page">
-      <header class="page-heading">
-        <h1>{{ task.title }}</h1>
-        <p class="caption">Task detail and progress overview.</p>
-      </header>
+<body>
+  <main class="detail-page">
+    <header class="page-heading">
+      <h1>{{ task.title }}</h1>
+      <p class="caption">Task detail and progress overview.</p>
+    </header>
 
-      <section class="detail-card">
-        <ul class="meta-list">
-          <li>Posted at: {{ task.posted_at }}</li>
-          {% if task.due_at %}
-          <li>Due at: {{ task.due_at }}</li>
-          {% endif %}
-          {% if task.completed %}
-          <li>Status: Completed</li>
-          {% else %}
-          <li>Status: Not Completed</li>
-          {% endif %}
-        </ul>
+    <div>
+      <a href="{% url 'index' %}">Top</a>
 
+      <a href="{% url 'delete' task.id %}">Delete</a>
+
+      <a href="{% url 'update' task.id %}">update</a>|<a href="{% url 'index' %}">Top</a>
+    </div>
+</body>
+<section class="detail-card">
+  <ul class="meta-list">
+    <li>Posted at: {{ task.posted_at }}</li>
+    {% if task.due_at %}
+    <li>Due at: {{ task.due_at }}</li>
+    {% endif %}
+    {% if task.completed %}
+    <li>Status: Completed</li>
+    {% else %}
+    <li>Status: Not Completed</li>
+    {% endif %}
+  </ul>
+
+  <div class="detail-actions">
+    <a class="top-link" href="{% url 'index' %}">← Top</a>
+  </div>
+</section>
+</main>
+</body>
         <div class="detail-actions">
           <a class="top-link" href="{% url 'index' %}">← Top</a>
           {% if not task.completed %}

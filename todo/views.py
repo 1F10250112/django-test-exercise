@@ -19,8 +19,20 @@ def index(request):
 
     tasks = Task.objects.all()
 
+    if request.GET.get('order') == 'due':
+        tasks_query = Task.objects.order_by('due_at')
+    else:
+        tasks_query = Task.objects.order_by('-posted_at')
+
+    query = request.GET.get('q')
+    if query:
+        tasks = tasks_query.filter(title__icontains=query)
+    else:
+        tasks = tasks_query
+
     context = {
-        'tasks': tasks
+        'tasks': tasks,
+        'query': query,
     }
     return render(request, 'todo/index.html', context)
 
