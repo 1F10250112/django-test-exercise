@@ -72,3 +72,13 @@ def delete(request, task_id):
 
     task.delete()
     return render(request, 'todo/delete.html')
+
+def finish(request, task_id):
+    try:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
+        raise Http404('Task does not exist')
+
+    task.completed = True
+    task.save()
+    return render(request, 'todo/finish.html')
