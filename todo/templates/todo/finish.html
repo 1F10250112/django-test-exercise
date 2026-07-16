@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <title>To Do Application</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="INIAD">
+    <link rel="stylesheet" href="{% static 'css/css.css' %}">
+  </head>
+
+  <body>
+    <h1>Finished</h1>
+    <p>The task has been marked as completed.</p>
+
+    <div>
+      <a href="{% url 'index' %}">Top</a>
+    </div>
+  </body>
+
+</html>
