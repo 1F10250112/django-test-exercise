@@ -13,6 +13,7 @@
 <body>
   <h1>Sample To Do Application</h1>
   <p>You can submit tasks from the following form.</p>
+  
   <form action="{% url 'index' %}" method="post">
     {% csrf_token %}
     <div>
@@ -29,56 +30,42 @@
   </form>
   <br>
 
-  <div>
-    <div class="search-container" style="margin-bottom: 20px;">
-      <form action="" method="get" style="display: flex; gap: 10px; max-width: 400px;">
-        <input type="text" name="q" placeholder="タスクを検索..." value="{{ query|default:'' }}"
-          style="flex-grow: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 20px; outline: none;">
-        <button type="submit"
-          style="padding: 8px 16px; background-color: #111; color: white; border: none; border-radius: 20px; cursor: pointer;">
-          Surch
-        </button>
-        {% if query %}
-        <a href="{% url 'index' %}"
-          style="display: flex; align-items: center; text-decoration: none; color: #666; font-size: 14px;">
-          Clear
-        </a>
-    {% for task in tasks %}
-    <div class="text">
-      <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
-      <ul>
-        <li>Posted at: {{ task.posted_at }}</li>
-        {% if task.due_at %} 
-        <li>Due at: {{ task.due_at }}</li>
-        {% endif %}
-        {% if task.completed %} 
-        <li>Status: Completed</li>
-        {% else %}
-        <li>Status: Not Completed</li>
-        <li><a href="{% url 'finish' task.id %}">Finish</a></li>
-        {% endif %}
-      </form>
-    </div>
+  <div class="search-container" style="margin-bottom: 20px;">
+    <form action="" method="get" style="display: flex; gap: 10px; max-width: 400px;">
+      <input type="text" name="q" placeholder="タスクを検索..." value="{{ query|default:'' }}"
+        style="flex-grow: 1; padding: 8px 12px; border: 1px solid #ccc; border-radius: 20px; outline: none;">
+      <button type="submit"
+        style="padding: 8px 16px; background-color: #111; color: white; border: none; border-radius: 20px; cursor: pointer;">
+        Search
+      </button>
+      {% if query %}
+      <a href="{% url 'index' %}"
+        style="display: flex; align-items: center; text-decoration: none; color: #666; font-size: 14px;">
+        Clear
+      </a>
+      {% endif %} </form> </div>
+
+  <div style="margin-bottom: 20px;">
     <a href="{% url 'index' %}?order=due">Sort by Due Date</a> |
     <a href="{% url 'index' %}?order=post">Sort by Posted Date</a>
   </div>
 
   {% for task in tasks %}
-  <div class="text">
+  <div class="text" style="margin-bottom: 15px;">
     <h2><a href="{% url 'detail' task.id %}">{{ task.title }}</a></h2>
     <ul>
       <li>Posted at: {{ task.posted_at }}</li>
-      {% if task.due_at %}
+      {% if task.due_at %} 
       <li>Due at: {{ task.due_at }}</li>
       {% endif %}
-      {% if task.completed %}
+      {% if task.completed %} 
       <li>Status: Completed</li>
       {% else %}
       <li>Status: Not Completed</li>
+      <li><a href="{% url 'finish' task.id %}">Finish</a></li>
       {% endif %}
     </ul>
   </div>
-  {% endfor %}
-</body>
+  {% endfor %} </body>
 
 </html>
