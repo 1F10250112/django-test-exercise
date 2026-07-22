@@ -69,4 +69,15 @@ def finish(request, task_id):
 
     task.completed = True
     task.save()
-    return render(request, 'todo/finish.html')
+    return render(request, 'todo/finish.html', {'task_id': task_id})
+
+def unfinish(request, task_id):
+    try:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
+        raise Http404('Task does not exist')
+
+    if request.method == 'POST':
+        task.completed = False
+        task.save()
+    return redirect('detail', task_id=task_id)

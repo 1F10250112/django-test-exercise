@@ -128,6 +128,16 @@ class TodoViewTestCase(TestCase):
         task.refresh_from_db()
         self.assertTrue(task.completed)
 
+    def test_unfinish_post(self):
+        task = Task(title='task1', due_at=timezone.make_aware(datetime(2024, 7, 1)), completed=True)
+        task.save()
+        client = Client()
+        response = client.post('/{}/unfinish/'.format(task.pk))
+
+        self.assertEqual(response.status_code, 302)
+        task.refresh_from_db()
+        self.assertFalse(task.completed)
+
     def test_detail_get_fail(self):
         client = Client()
         response = client.get('/1/')
